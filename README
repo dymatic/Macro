@@ -1,0 +1,11 @@
+===Macro
+Macro is a utility for reading history files and making scripts from them. Macro will look for two commands in the history file (startmacro and stopmacro), find the latest usage of the two tokens, and return a script with those commands in it.
+-
+
+===Uses of Macro
+Macro can be used to interactively create scripts. It may be easier to execute the commands that need to be done instead of writing them down in a script.
+-
+
+===License
+Macro is licensed under the GNU General Public License revision 2.
+-
