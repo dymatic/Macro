@@ -26,7 +26,6 @@ main = do
   contents <- hGetContents file
 
   let findings = latest (map rmFluff (lines contents))
-  mapM putStrLn findings
 -- On StopMacro, find startMacro, return the lines, get all of the strings in order.
   let answer = (before (after findings "startmacro") "stopmacro")
 

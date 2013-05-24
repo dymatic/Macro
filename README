@@ -6,6 +6,11 @@ Macro is a utility for reading history files and making scripts from them. Macro
 Macro can be used to interactively create scripts. It may be easier to execute the commands that need to be done instead of writing them down in a script.
 -
 
+===Calling Macro
+Macro is pretty weird with the way it is called. You supply the history file as well as the name of the output script (sans .sh) to macro. To access a history file, redirect history like so: "history > file". After the script is generated, the file can be closed. Why is it done like this? Preserving compatibility with /bin/sh is important to me, and the "history" command is the only way to flush everything. ~/.bash_history is outdated and will only get additions after the terminal session is closed or flushed.
+
+Eventually Macro will have an option to remove the file after using it.
+-
 ===License
 Macro is licensed under the GNU General Public License revision 2.
 -
