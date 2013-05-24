@@ -7,27 +7,6 @@ import System.IO
 import System.Process
 import System.Directory
 import System.Environment
---ModChangeFile
-match :: (Eq a) => [(a,b)] -> a -> (a,b)
-match a@((b,c):xs) d
-  | d `notElem` (map fst a) = (b,c)
-  | d == b = (b,c)
-  | otherwise = match xs d
-                
-separate :: String -> (Int, String)
-separate x = (((read number) :: Int), string)
-  where sx = removeLeading x ' '
-        number = before sx ' '
-        string = (removeBreak (== ' ') (after sx ' '))
-        
-getNumber :: [(Int, String)] -> Int -> (Int,String)
-getNumber x b = match x b
-
-ttf :: (a,b) -> (b,a)
-ttf (a,b) = (b,a)
-
-getString :: [(Int,String)] -> String -> (Int,String)
-getString x b = ttf $ match (map ttf x) b
 
 latest :: [String] -> [String]
 latest a
@@ -35,15 +14,18 @@ latest a
   | otherwise = a
                 
 main = do
-  (a:b:_) <- getArgs
-  file <- openFile a ReadMode
+  (a:_) <- getArgs
+
+  homeDir <- getEnv "HOME"
+  let fileName = (homeDir ++ "/.bash_history")
+  file <- openFile fileName ReadMode
+  
   contents <- hGetContents file
-   
-  let findings = map separate (latest (lines contents))
-  let allStrings = (map snd findings)
+
+  let findings = latest (lines contents)
   
 -- On StopMacro, find startMacro, return the lines, get all of the strings in order.
-  let answer = (before (after allStrings "startmacro") "stopmacro")
+  let answer = (before (after findings "startmacro") "stopmacro")
 
-  writeFile (b++".sh") (unlines ("#/bin/bash":answer))
-  system(("chmod +x " ++ (b++".sh")))
+  writeFile (a++".sh") (unlines ("#/bin/bash":answer))
+  system(("chmod +x " ++ (a++".sh")))
