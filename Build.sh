@@ -11,6 +11,8 @@ mv Main macro
 
 rm DEBIAN/usr/bin/macro
 cp macro DEBIAN/usr/bin
+cp startmacro DEBIAN/usr/bin
+cp stopmacro DEBIAN/usr/bin
 
 rm DEBIAN/usr/share/doc/macro/README
 cp README DEBIAN/usr/share/doc/macro/

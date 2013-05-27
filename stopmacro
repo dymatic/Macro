@@ -1,0 +1,9 @@
+#!/bin/sh
+MACRO="$1"
+if [ "$1" == "" ]
+then MACRO="macro"
+fi
+echo "Macro recording stopped"
+history > /tmp/file1
+macro /tmp/file1 $MACRO
+rm /tmp/file1
